@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServices
 
 struct FrameworkDetailView: View {
     
@@ -30,15 +31,22 @@ struct FrameworkDetailView: View {
             
             Spacer()
             
-            Button {
-                viewModel.isShowingSafariView = true
-            } label: {
+            
+            // appeared in iOS 14, can make open URL directly in Safari.
+            // If we use Link, we dont need UIKit SafariView
+            Link(destination: URL(string: viewModel.framework.urlString) ?? URL(string: "www.apple.com")!) {
                 AFButton(title: "Learn More")
             }
+            
+//            Button {
+//                viewModel.isShowingSafariView = true
+//            } label: {
+//                AFButton(title: "Learn More")
+//            }
         }
-        .sheet(isPresented: $viewModel.isShowingSafariView, content: {
-            SafariView(url: URL(string: viewModel.framework.urlString)!)
-        })
+//        .sheet(isPresented: $viewModel.isShowingSafariView, content: {
+//            SafariView(url: URL(string: viewModel.framework.urlString) ?? URL(string: "www.apple.com")!)
+//        })
     }
 
 

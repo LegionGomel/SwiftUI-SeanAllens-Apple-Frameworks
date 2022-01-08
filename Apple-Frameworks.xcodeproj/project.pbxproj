@@ -107,8 +107,8 @@
 		CED967D327495EFF006DE819 /* FrameworkDetailView */ = {
 			isa = PBXGroup;
 			children = (
-				CE0B3C8B274820D300061164 /* FrameworkDetailView.swift */,
 				CE83E7FC2789FAEF0022D79E /*  FrameworkDetailViewModel.swift */,
+				CE0B3C8B274820D300061164 /* FrameworkDetailView.swift */,
 			);
 			path = FrameworkDetailView;
 			sourceTree = "<group>";
