@@ -41,7 +41,7 @@ struct FrameworkGridView: View {
              $viewModel.isShowingDetailView - passing our value to @Binding value inside of
              FrameworkDetailView*/
             .sheet(isPresented: $viewModel.isShowingDetailView) {
-                FrameworkDetailView(framework: viewModel.selectedFramework ?? MockData.sampleFramework, isShowingDetailView: $viewModel.isShowingDetailView)
+                FrameworkDetailView(viewModel: FrameworkDetailViewModel(framework: viewModel.selectedFramework!, isShowingDetailView: $viewModel.isShowingDetailView))
             }
         }
     }

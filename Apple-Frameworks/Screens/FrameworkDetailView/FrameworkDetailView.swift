@@ -9,37 +9,35 @@ import SwiftUI
 
 struct FrameworkDetailView: View {
     
-    var framework: Framework
-    @Binding var isShowingDetailView: Bool
-    @State private var isShowingSafariView = false
+    @ObservedObject var viewModel: FrameworkDetailViewModel
     
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 
-                XDismissButton(isShowingDetailView: $isShowingDetailView)
+                XDismissButton(isShowingDetailView: $viewModel.isShowingDetailView.wrappedValue)
             }
             
             
             Spacer()
             
-            FrameworkTitleView(framework: framework)
+            FrameworkTitleView(framework: viewModel.framework)
             
-            Text(framework.description)
+            Text(viewModel.framework.description)
                 .font(.body)
                 .padding()
             
             Spacer()
             
             Button {
-                isShowingSafariView = true
+                viewModel.isShowingSafariView = true
             } label: {
                 AFButton(title: "Learn More")
             }
         }
-        .sheet(isPresented: $isShowingSafariView, content: {
-            SafariView(url: URL(string: framework.urlString)!)
+        .sheet(isPresented: $viewModel.isShowingSafariView, content: {
+            SafariView(url: URL(string: viewModel.framework.urlString)!)
         })
     }
 
@@ -49,7 +47,7 @@ struct FrameworkDetailView: View {
 struct FrameworkDetailView_Previews: PreviewProvider {
     static var previews: some View {
         // .constant() - create a binding with immutable value
-        FrameworkDetailView(framework: MockData.sampleFramework, isShowingDetailView: .constant(true))
+        FrameworkDetailView(viewModel: FrameworkDetailViewModel(framework: MockData.sampleFramework, isShowingDetailView: .constant(false)))
             .preferredColorScheme(.dark)
             
             
